@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "489533284237",
+    "firebase_url": "https://wellboard-32e22.firebaseio.com",
+    "project_id": "wellboard-32e22",
+    "storage_bucket": "wellboard-32e22.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:489533284237:android:bbd012b50e897dfb3ea7c4",
+        "android_client_info": {
+          "package_name": "com.tony_fire.descorder"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "489533284237-0mhclg6pimm3l126v37cv4rdqu5fboer.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.tony_fire.descorder",
+            "certificate_hash": "f2eb1b1848c51633632090b9a143a064125ee3b4"
+          }
+        },
+        {
+          "client_id": "489533284237-if23bjpmtp94js3r5kdauvvi3dnep8b7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBtfCdV6VAY1gu9rx9ajSe6YL8mjypo17k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "489533284237-if23bjpmtp94js3r5kdauvvi3dnep8b7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

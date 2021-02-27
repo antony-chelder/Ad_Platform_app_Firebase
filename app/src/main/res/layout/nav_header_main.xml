@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/nav_header_height"
+    android:background="@color/nav_header"
+    android:padding="5dp">
+
+    <ImageView
+        android:id="@+id/imPhoto"
+        android:layout_width="@dimen/nav_header_photo"
+        android:layout_height="@dimen/nav_header_photo"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.083"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.125" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@color/nav_view_text"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.444"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="parent"
+        app:layout_constraintVertical_bias="1.0"></LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_mail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/header_text_bg"
+        android:padding="3dp"
+        android:paddingStart="10dp"
+        android:paddingLeft="10dp"
+        android:paddingEnd="10dp"
+        android:paddingRight="10dp"
+        android:text="@string/sign_in_or"
+        android:textColor="@color/white"
+        app:layout_constraintStart_toStartOf="@+id/imPhoto"
+        app:layout_constraintTop_toBottomOf="@+id/imPhoto" />
+</androidx.constraintlayout.widget.ConstraintLayout>

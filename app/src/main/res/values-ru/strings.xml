@@ -1,0 +1,71 @@
+<resources>
+    <string name="app_name">DescOrder</string>
+
+    <string name="my_ads">Мои Обьявления</string>
+    <string name="my_ads2">Обьявления</string>
+    <string name="cars_ads">Машины</string>
+    <string name="pc_ads">Компьютеры</string>
+    <string name="smartpone_ads">Смартфоны</string>
+    <string name="fv_ads">Избранные</string>
+    <string name="dm_ads">Бытовая техника</string>
+    <string name="sign_up">Регистрация</string>
+    <string name="sign_in">Вход</string>
+    <string name="sign_out">Выход</string>
+    <string name="sign_in_1">Войти</string>
+    <string name="sign_up_1">Зарегистрироваться</string>
+    <string name="sign_in_or">Войдите или зарегистрируйтесь</string>
+    <string name="accaunt">Аккаунт</string>
+    <string name="email">Email</string>
+    <string name="password">Пароль</string>
+    <string name="toggleopen">Open</string>
+    <string name="sign_link_massage"> Войдите в Ваш существующий аккаунт</string>
+    <string name="link_ok_massage" >Ваш аккаунт был успешно привязан к Google аккаунту</string>
+    <string name="forget_password" >Забыли пароль?</string>
+    <string name="send_forget_password" >Отправить ссылку с восстановлением пароля</string>
+    <string name="tv_password_message" >Для восстановления пароля введите Вашу почту</string>
+    <string name="email_empty" >Поле с почтой не заполнено</string>
+    <string name="send_completed" >Сообщение отправлено!</string>
+    <string name="error_send" >Обнаружена ошибка,попробуйте снова</string>
+    <string name="emailAdd" >Почта:</string>
+    <string name="plus_add" >Add ad</string>
+    <string name="toggleclose">Close</string>
+    <string name="cantexit">Вы не можете выйти,потому что Вы не вошли в аккаунт!</string>
+    <string name="cantseecategory">Для просмотра этой категории,Войдите или Зарегистрируйтесь</string>
+    <string name="emaiorpassempty">Email или Password пустой!</string>
+    <string name="message_email">Мне интересно Ваше обьявление</string>
+    <string name="about_ad">Обьявление</string>
+    <string name="havent_app">У Вас нету приложения для отправки сообщения</string>
+    <string name="ok">OK</string>
+    <string name="alert">Внимание</string>
+    <string name="mail_not_verified">Вы не подтвердили ваш аккаунт,проверьте почту,и подтвердите ваш аккаунт!</string>
+    <string name="check_mail">Проверьте Вашу почту,и подтвердите аккаунт перейдя по ссылке</string>
+    <!--EditActivity-->
+    <string name="editTitile">*Название</string>
+    <string name="editprice">*Цена</string>
+    <string name="editdisc">*Описание</string>
+    <string name="editTel">*Телефон</string>
+    <string name="message_of_empty">Необходимые поля пусты или фото не выбрано!</string>
+    <!--PostActivity-->
+    <string name="delete_title">Удалить обьявление</string>
+    <string name="delete_massage">Вы действительно хотите удалить обьявление?</string>
+    <string name="delete_yes">Да</string>
+    <string name="delete_no">Нет</string>
+    <string name="item_deleted">Обьявление удалено успешно</string>
+    <!--ShowActivity-->
+    <string name="price">Цена:</string>
+    <string name="price1">Цена:</string>
+    <string name="tel">Телефон:</string>
+    <string name="tel2">Телефон:</string>
+    <!--ChooseImage-->
+    <string name="main_image">Главное фото</string>
+    <string name="image1">Фото 1</string>
+    <string name="шьфпу2">Фото 2</string>
+    <string name="google_sign">Регистрация через Google</string>
+    <string name="google_sign_in">Войти через Google</string>
+    <string name="send_email_again">Оправить ссылку снова</string>
+    <string name="others_ads">Все обьявления</string>
+    <string name="more_ads">Еще</string>
+    <string name="guest">Гость</string>
+
+
+</resources>

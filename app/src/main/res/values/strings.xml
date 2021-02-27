@@ -1,0 +1,76 @@
+<resources>
+    <string name="app_name">DescOrder</string>
+    <string name="banner_id" translatable="false">ca-app-pub-3940256099942544/3419835294</string>
+    <string name="bannerreal_id" translatable="false">ca-app-pub-3005857137279781/6896747542</string>
+    <string name="my_ads">My ads</string>
+    <string name="my_ads2">Ads</string>
+    <string name="cars_ads">Cars</string>
+    <string name="pc_ads">Computers</string>
+    <string name="smartpone_ads">Smartphones</string>
+    <string name="dm_ads">Appliances</string>
+    <string name="fv_ads">Favourites</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="sign_in">Sign In</string>
+    <string name="sign_out">Sign Out</string>
+    <string name="sign_in_1">Log In</string>
+    <string name="sign_up_1">Sign Up</string>
+    <string name="sign_in_or">Log In or Sign Up</string>
+    <string name="accaunt">Account</string>
+    <string name="email">Email</string>
+    <string name="password">*Password</string>
+    <string name="toggleopen">Open</string>
+    <string name="toggleclose">Close</string>
+    <string name="cantexit">You cannot Sign Out,because you are not Signed In</string>
+    <string name="cantseecategory">To view this category, Sign In or Sign Up</string>
+    <string name="emaiorpassempty">Email or Password are empty!</string>
+    <string name="message_email">I really interested of your ad!</string>
+    <string name="about_ad">About your ad</string>
+    <string name="havent_app">You have not ad to send a message</string>
+
+
+
+    <string name="message_of_empty">Required fields are empty or no photo selected!</string>
+
+    <string name="ok">OK</string>
+    <string name="alert">Attention!</string>
+    <string name="mail_not_verified">You havent verified your account, please check your email and verify  account</string>
+    <string name="check_mail">Check your email and confirm account by clicking on the link</string>
+    <!--EditActivity-->
+    <string name="editTitile">*Title</string>
+    <string name="editprice">*Price</string>
+    <string name="editdisc">*Description</string>
+    <string name="editTel">*Telephone</string>
+    <!--PostActivity-->
+    <string name="delete_title">Delete Ad</string>
+    <string name="delete_massage">Are you sure you want to delete the ad?</string>
+    <string name="delete_yes">Yes</string>
+    <string name="delete_no">No</string>
+    <string name="item_deleted">Ad deleted successfully</string>
+    <!--ShowActivity-->
+    <string name="price">Price:</string>
+    <string name="price1">Price:</string>
+    <string name="tel">Telephone:</string>
+    <string name="tel2">Telephone:</string>
+    <!--ChooseImage-->
+    <string name="main_image">Main photo</string>
+    <string name="image1">Photo 1</string>
+    <string name="шьфпу2">Photo 2</string>
+    <string name="google_sign">Gmail Sign Up</string>
+    <string name="google_sign_in">Google Sign In</string>
+    <string name="send_email_again">Send the link again</string>
+    <string name="sign_link_massage" >Log in to your existing account</string>
+    <string name="link_ok_massage" >Your account has been successfully linked to your Email address</string>
+    <string name="forget_password" >Forgot your password?</string>
+    <string name="send_forget_password" >Send recovery link of your password</string>
+    <string name="tv_password_message" >To recover the password, enter your Email address</string>
+    <string name="email_empty" >Email field is empty</string>
+    <string name="send_completed" >Message sent!</string>
+    <string name="error_send" >An error occurred, please try again</string>
+    <string name="emailAdd" >Email:</string>
+    <string name="plus_add" >Add ad</string>
+    <string name="others_ads">All ads</string>
+    <string name="more_ads">More</string>
+    <string name="guest">Guest</string>
+
+
+</resources>

@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="10dp">
+
+    <LinearLayout
+        android:id="@+id/linearLayout4"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:alpha="0.9"
+        android:background="@drawable/sign_up_dialog_bg"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"></LinearLayout>
+
+    <TextView
+        android:id="@+id/tvAlertTitile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="TextView"
+        android:textColor="@color/black"
+        android:textSize="19sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/edEmail"
+        app:layout_constraintStart_toStartOf="@+id/edEmail"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/edEmail"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
+        android:ems="10"
+        android:hint="Email"
+        android:inputType="textPersonName"
+        android:textColorHint="@color/nav_view_text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv.message" />
+
+    <EditText
+        android:id="@+id/edPass"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:ems="10"
+        android:hint="Password"
+        android:inputType="textPassword"
+        android:textColorHint="@color/nav_view_text"
+        app:layout_constraintEnd_toEndOf="@+id/edEmail"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="@+id/edEmail"
+        app:layout_constraintTop_toBottomOf="@+id/edEmail" />
+
+    <Button
+        android:id="@+id/b_sighn_up"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/sign_up_1"
+        android:textSize="11sp"
+        app:layout_constraintEnd_toEndOf="@+id/edEmail"
+        app:layout_constraintStart_toStartOf="@+id/edEmail"
+        app:layout_constraintTop_toBottomOf="@+id/edPass" />
+
+    <com.google.android.gms.common.SignInButton
+        android:id="@+id/b_google_sign"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        android:background="@color/nav_header_text"
+        app:buttonSize="icon_only"
+        app:layout_constraintBottom_toBottomOf="@+id/linearLayout4"
+        app:layout_constraintEnd_toEndOf="@+id/edEmail"
+        app:layout_constraintStart_toStartOf="@+id/edEmail"
+        app:layout_constraintTop_toBottomOf="@+id/b_sighn_up"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <Button
+        android:id="@+id/b_forget"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        android:text="@string/forget_password"
+        android:textSize="10sp"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/edEmail"
+        app:layout_constraintStart_toStartOf="@+id/edEmail"
+        app:layout_constraintTop_toBottomOf="@+id/b_google_sign" />
+
+    <TextView
+        android:id="@+id/tv.message"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:gravity="center_horizontal"
+        android:text="TextView"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvAlertTitile" />
+</androidx.constraintlayout.widget.ConstraintLayout>
