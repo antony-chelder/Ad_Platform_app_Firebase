@@ -271,7 +271,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             if(currentUser.isAnonymous()){
                 checkghost = 0;
                 newAdItem.setVisible(false);
-                useremail.setText(R.string.ghost);
+                useremail.setText(R.string.guest);
             } else {
                 checkghost = 1;
                 newAdItem.setVisible(true);
