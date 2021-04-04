@@ -19,14 +19,13 @@
     <string name="email">Email</string>
     <string name="password">*Password</string>
     <string name="toggleopen">Open</string>
-    <string name="toggleclose">Close</string>
+    <string name="toggleclose">Done</string>
     <string name="cantexit">You cannot Sign Out,because you are not Signed In</string>
     <string name="cantseecategory">To view this category, Sign In or Sign Up</string>
     <string name="emaiorpassempty">Email or Password are empty!</string>
     <string name="message_email">I really interested of your ad!</string>
     <string name="about_ad">About your ad</string>
     <string name="havent_app">You have not ad to send a message</string>
-
 
 
     <string name="message_of_empty">Required fields are empty or no photo selected!</string>
@@ -48,6 +47,10 @@
     <string name="item_deleted">Ad deleted successfully</string>
     <!--ShowActivity-->
     <string name="price">Price:</string>
+    <string name="country">Country:</string>
+    <string name="city">City:</string>
+    <string name="village_text">Zip Code:</string>
+    <string name="empty_village">Not indicated</string>
     <string name="price1">Price:</string>
     <string name="tel">Telephone:</string>
     <string name="tel2">Telephone:</string>
@@ -58,19 +61,32 @@
     <string name="google_sign">Gmail Sign Up</string>
     <string name="google_sign_in">Google Sign In</string>
     <string name="send_email_again">Send the link again</string>
-    <string name="sign_link_massage" >Log in to your existing account</string>
-    <string name="link_ok_massage" >Your account has been successfully linked to your Email address</string>
-    <string name="forget_password" >Forgot your password?</string>
-    <string name="send_forget_password" >Send recovery link of your password</string>
-    <string name="tv_password_message" >To recover the password, enter your Email address</string>
-    <string name="email_empty" >Email field is empty</string>
-    <string name="send_completed" >Message sent!</string>
-    <string name="error_send" >An error occurred, please try again</string>
-    <string name="emailAdd" >Email:</string>
-    <string name="plus_add" >Add ad</string>
+    <string name="sign_link_massage">Log in to your existing account</string>
+    <string name="link_ok_massage">Your account has been successfully linked to your Email address</string>
+    <string name="forget_password">Forgot your password?</string>
+    <string name="send_forget_password">Send recovery link of your password</string>
+    <string name="tv_password_message">To recover the password, enter your Email address</string>
+    <string name="email_empty">Email field is empty</string>
+    <string name="send_completed">Message sent!</string>
+    <string name="error_send">An error occurred, please try again</string>
+    <string name="emailAdd">Email:</string>
+    <string name="plus_add">Add ad</string>
     <string name="others_ads">All ads</string>
     <string name="more_ads">More</string>
     <string name="guest">Guest</string>
+    <string name="select_country">*Select Country</string>
+    <string name="select_city">*Select City</string>
+    <string name="village">Village, province or etc</string>
+    <string name="index_edit">*Zip Code</string>
+
+    <!--FilterActivity-->
+    <string name="select_country_text_filter">Select Country</string>
+    <string name="select_city_text_filter">Select City</string>
+    <string name="select_filter_country">Select a country to filter</string>
+    <string name="select_filter_city">Select a city to filter</string>
+    <string name="select_filter_index">Enter Zip Code</string>
+    <string name="select_filter_index_hint">Zip Code :</string>
+    <string name="use_filter">Use this filter</string>
 
 
 </resources>

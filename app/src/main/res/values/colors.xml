@@ -16,4 +16,6 @@
     <color name="nav_view_item_tint">#533F78</color>
     <color name="nav_view_accaunt">#342E3E</color>
     <color name="grey">#757575</color>
+    <color name="grey_light">#B5B5B5</color>
+    <color name="country_color">#161515</color>
 </resources>

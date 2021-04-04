@@ -17,8 +17,6 @@ import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.EmailAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
-import com.google.firebase.auth.FirebaseAuthInvalidUserException;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
@@ -51,7 +49,7 @@ public class Accaunt_helper {
                                     FirebaseUser user = mAuth.getCurrentUser();
                                     sendEmailVerify(user);
                                 }
-                                activity.getuserData();
+                                activity.MyUiUpdates();
 
 
 
@@ -72,7 +70,7 @@ public class Accaunt_helper {
         }
         else {
             Toast.makeText(activity, R.string.emaiorpassempty, Toast.LENGTH_SHORT).show();
-            activity.getuserData();
+            activity.MyUiUpdates();
         }
 
     }
@@ -85,7 +83,7 @@ public class Accaunt_helper {
                             if (task.isSuccessful()) {
                                 // Sign in success, update UI with the signed-in user's information
                                 Toast.makeText(activity, "Log In done!", Toast.LENGTH_SHORT).show();
-                                activity.getuserData();
+                                activity.MyUiUpdates();
 
                             }
                                 else {
@@ -93,6 +91,7 @@ public class Accaunt_helper {
                                 Log.w("MyLog", "signInWithEmail:failure", task.getException());
                                 Toast.makeText(activity, "Authentication failed.",
                                         Toast.LENGTH_SHORT).show();
+                                activity.MyUiUpdates();
                             }
 
                             // ...
@@ -103,7 +102,7 @@ public class Accaunt_helper {
         }
         else {
             Toast.makeText(activity, R.string.emaiorpassempty, Toast.LENGTH_SHORT).show();
-            activity.getuserData();
+            activity.MyUiUpdates();
         }
 
 
@@ -114,7 +113,7 @@ public class Accaunt_helper {
         if(mAuth.getCurrentUser().isAnonymous())return;
         mAuth.signOut();
         googleSignInClient.signOut();
-        activity.getuserData();
+        activity.MyUiUpdates();
 
     }
 
@@ -150,7 +149,7 @@ public class Accaunt_helper {
                 if(task.isSuccessful()){
                     Toast.makeText(activity, "Log In done!", Toast.LENGTH_SHORT).show();
                     if(index == 1) LinkEmailPass(tempEmail,tempPassword);
-                    activity.getuserData();
+                    activity.MyUiUpdates();
 
 
                 }
@@ -231,7 +230,7 @@ public class Accaunt_helper {
                         if (task.isSuccessful()) {
                             Toast.makeText(activity, R.string.link_ok_massage, Toast.LENGTH_SHORT).show();
                             if(task.getResult() == null) return;
-                            activity.getuserData();
+                            activity.MyUiUpdates();
 
 
                         } else {
@@ -259,7 +258,7 @@ public class Accaunt_helper {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()){
-                    activity.getuserData();
+                    activity.MyUiUpdates();
 
                 }
 

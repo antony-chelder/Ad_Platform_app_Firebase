@@ -5,6 +5,17 @@
 
     <item android:title="@string/plus_add"
         android:id="@+id/new_add"
+        android:orderInCategory="100"
         android:icon="@drawable/ic_new_add"
+        app:showAsAction="ifRoom" />
+    <item android:title="Search"
+        android:id="@+id/search"
+        app:actionViewClass="androidx.appcompat.widget.SearchView"
+        android:orderInCategory="200"
+        app:showAsAction="ifRoom" />
+   <item android:title="Search"
+        android:id="@+id/filter"
+        android:icon="@drawable/ic_filter"
+        android:orderInCategory="300"
         app:showAsAction="ifRoom" />
 </menu>

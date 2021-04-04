@@ -4,6 +4,10 @@ import java.io.Serializable;
 
 public class NewPost implements Serializable {
     private String imageId;
+    private String selectcountry;
+    private String selectcity;
+    private String index;
+    private String selectcat;
     private String imageId2;
     private String imageId3;
     private String title;
@@ -18,6 +22,38 @@ public class NewPost implements Serializable {
     private String totalViews = "0";
     private String totalCalls = "0";
     private String totalEmails = "0";
+
+    public String getSelectcat() {
+        return selectcat;
+    }
+
+    public void setSelectcat(String selectcat) {
+        this.selectcat = selectcat;
+    }
+
+    public String getSelectcountry() {
+        return selectcountry;
+    }
+
+    public void setSelectcountry(String selectcountry) {
+        this.selectcountry = selectcountry;
+    }
+
+    public String getSelectcity() {
+        return selectcity;
+    }
+
+    public void setSelectcity(String selectcity) {
+        this.selectcity = selectcity;
+    }
+
+    public String getIndex() {
+        return index;
+    }
+
+    public void setIndex(String index) {
+        this.index = index;
+    }
 
     public long getFavCounter() {
         return favCounter;

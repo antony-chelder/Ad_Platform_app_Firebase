@@ -28,7 +28,7 @@
     <string name="error_send" >Обнаружена ошибка,попробуйте снова</string>
     <string name="emailAdd" >Почта:</string>
     <string name="plus_add" >Add ad</string>
-    <string name="toggleclose">Close</string>
+    <string name="toggleclose">Готово</string>
     <string name="cantexit">Вы не можете выйти,потому что Вы не вошли в аккаунт!</string>
     <string name="cantseecategory">Для просмотра этой категории,Войдите или Зарегистрируйтесь</string>
     <string name="emaiorpassempty">Email или Password пустой!</string>
@@ -53,7 +53,11 @@
     <string name="item_deleted">Обьявление удалено успешно</string>
     <!--ShowActivity-->
     <string name="price">Цена:</string>
+    <string name="empty_village">Не указано</string>
+    <string name="country">Страна:</string>
+    <string name="city">Город:</string>
     <string name="price1">Цена:</string>
+    <string name="village_text">Индекс:</string>
     <string name="tel">Телефон:</string>
     <string name="tel2">Телефон:</string>
     <!--ChooseImage-->
@@ -66,6 +70,19 @@
     <string name="others_ads">Все обьявления</string>
     <string name="more_ads">Еще</string>
     <string name="guest">Гость</string>
+    <string name="select_country">*Выберите страну</string>
+    <string name="select_city">*Выберите город</string>
+    <string name="village">Село,провинция,или другое</string>
+    <string name="index_edit">*Индекс</string>
+
+    <!--FilterActivity-->
+    <string name="select_country_text_filter">Выберите страну</string>
+    <string name="select_city_text_filter">Выберите город</string>
+    <string name="select_filter_country">Выберите страну для фильтрации</string>
+    <string name="select_filter_city">Выберите город для фильтрации</string>
+    <string name="select_filter_index">Укажите индекс :</string>
+    <string name="select_filter_index_hint">Индекс</string>
+    <string name="use_filter">Исользовать этот фильтр</string>
 
 
 </resources>

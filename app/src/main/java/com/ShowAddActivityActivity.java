@@ -22,7 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ShowAddActivityActivity extends AppCompatActivity {
-    private TextView tvtitle,tvPrice,tvtel,tvDesc,tvEmail;
+    private TextView tvtitle, tvPrice, tvtel, tvDesc, tvEmail, tvCountry, tvCity, tvVillage;
     private ImageView imMain;
     private List<String> imagesUris;
     private ImageAdapter imageAdapter;
@@ -36,11 +36,12 @@ public class ShowAddActivityActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.show_add_activity);
+        setContentView(R.layout.showaddactiviyreal);
         init();
     }
-    private void init(){
-        dbManager = new DbManager(null,this);
+
+    private void init() {
+        dbManager = new DbManager(null, this);
         images_conter = findViewById(R.id.tvImagesCounter2);
         imagesUris = new ArrayList<>();
         imageAdapter = new ImageAdapter(this);
@@ -66,40 +67,41 @@ public class ShowAddActivityActivity extends AppCompatActivity {
         });
 
 
-
+        tvCountry = findViewById(R.id.text_country);
+        tvCity = findViewById(R.id.text_city);
+        tvVillage = findViewById(R.id.text_village);
         tvtitle = findViewById(R.id.tvTitle_1);
         tvPrice = findViewById(R.id.tvPrice);
         tvtel = findViewById(R.id.tvTel);
         tvEmail = findViewById(R.id.tvemail_text);
         tvDesc = findViewById(R.id.tvTitle_2);
         //imMain = findViewById(R.id.view_pager);
-        if(getIntent() !=null)
-        {
+        if (getIntent() != null) {
             Intent i = getIntent();
-             newPost = (NewPost) i.getSerializableExtra(MyConstans.NEW_POST_INTENT);
-            if(newPost== null)return;
-             tvtitle.setText(newPost.getTitle());
-             tvPrice.setText(newPost.getPrice());
-             tvDesc.setText(newPost.getDesc());
-             tvEmail.setText(newPost.getEmail());
-             tvtel.setText(newPost.getTel());
-
-             tel = newPost.getTel();
-
-             String[] images = new String[3];
-             images[0] = newPost.getImageId();
-             images[1] = newPost.getImageId2();
-             images[2] = newPost.getImageId3();
-            for(String s: images){
-                if(!s.equals("empty"))imagesUris.add(s);
+            newPost = (NewPost) i.getSerializableExtra(MyConstans.NEW_POST_INTENT);
+            if (newPost == null) return;
+            tvCountry.setText(newPost.getSelectcountry());
+            tvCity.setText(newPost.getSelectcity());
+            tvtitle.setText(newPost.getTitle());
+            tvVillage.setText(newPost.getIndex());
+            tvPrice.setText(newPost.getPrice());
+            tvDesc.setText(newPost.getDesc());
+            tvtel.setText(newPost.getTel());
+            tvEmail.setText(newPost.getEmail());
+            tel = newPost.getTel();
+            String[] images = new String[3];
+            images[0] = newPost.getImageId();
+            images[1] = newPost.getImageId2();
+            images[2] = newPost.getImageId3();
+            for (String s : images) {
+                if (!s.equals("empty")) imagesUris.add(s);
             }
             imageAdapter.UpdateImages(imagesUris);
             String dataText;
-            if(imagesUris.size()>0) {
+            if (imagesUris.size() > 0) {
 
                 dataText = 1 + "/" + imagesUris.size();
-            }
-            else {
+            } else {
                 dataText = 0 + "/" + imagesUris.size();
             }
             images_conter.setText(dataText);
@@ -107,8 +109,9 @@ public class ShowAddActivityActivity extends AppCompatActivity {
         }
 
     }
-    public void OnClckCall(View view){
-        if(!istotalEmailsCalls){
+
+    public void OnClckCall(View view) {
+        if (!istotalEmailsCalls) {
             dbManager.updateTotalCalls(newPost);
             int totalcalls = Integer.parseInt(newPost.getTotalCalls());
             totalcalls++;
@@ -117,15 +120,16 @@ public class ShowAddActivityActivity extends AppCompatActivity {
         }
 
 
-        String temtell = "tel:"+ tel;
+        String temtell = "tel:" + tel;
         Intent icall = new Intent(Intent.ACTION_DIAL);
         icall.setData(Uri.parse(temtell));
         startActivity(icall);
 
 
     }
-    public void OnClckEmail(View view){
-        if(!istotalEmailsAdded){
+
+    public void OnClckEmail(View view) {
+        if (!istotalEmailsAdded) {
             dbManager.updateTotalEmails(newPost);
             int totalemails = Integer.parseInt(newPost.getTotalEmails());
             totalemails++;
@@ -136,14 +140,13 @@ public class ShowAddActivityActivity extends AppCompatActivity {
 
         Intent iemail = new Intent(Intent.ACTION_SEND);
         iemail.setType("message/rfc822");
-        iemail.putExtra(Intent.EXTRA_EMAIL,new String[]{newPost.getEmail()});
-        iemail.putExtra(Intent.EXTRA_SUBJECT,"About your ad");
-        iemail.putExtra(Intent.EXTRA_TEXT,"I really interested of your ad!");
+        iemail.putExtra(Intent.EXTRA_EMAIL, new String[]{newPost.getEmail()});
+        iemail.putExtra(Intent.EXTRA_SUBJECT, "About your ad");
+        iemail.putExtra(Intent.EXTRA_TEXT, "I really interested of your ad!");
         try {
-            startActivity(Intent.createChooser(iemail,"Open with:"));
+            startActivity(Intent.createChooser(iemail, "Open with:"));
 
-        }
-        catch (ActivityNotFoundException exception){
+        } catch (ActivityNotFoundException exception) {
             Toast.makeText(this, R.string.havent_app, Toast.LENGTH_SHORT).show();
         }
 
@@ -151,4 +154,4 @@ public class ShowAddActivityActivity extends AppCompatActivity {
     }
 
 
-    }
+}

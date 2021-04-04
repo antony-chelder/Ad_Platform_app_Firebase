@@ -147,17 +147,21 @@ public class DbManager {
 
         }else {
             if (lastTime.equals("0")) {
-                mquery = databaseReference.orderByChild(ORDER_BY_CAT_TIME).startAt(cat).endAt(cat + "\uf8ff");
+                mquery = databaseReference.orderByChild(ORDER_BY_CAT_TIME).startAt(cat).endAt(cat + "\uf8ff").limitToLast(MyConstans.ADS_LIMIT);
             } else {
-                mquery = databaseReference.orderByChild(ORDER_BY_CAT_TIME).startAt(cat).endAt(cat + "\uf8ff");
+                mquery = databaseReference.orderByChild(ORDER_BY_CAT_TIME).startAt(cat).endAt(cat + "_"+ lastTime).limitToLast(MyConstans.ADS_LIMIT);
 
             }
 
         }
         readDataUpdate();
+        }
 
-
-
+        public void getSearchresult(String searchtext){
+            if(mAuth.getUid() == null)return;
+            DatabaseReference databaseReference = db.getReference(MAIN_ADS_PATH);
+            mquery = databaseReference.orderByChild( "/status/title_time").startAt(searchtext).endAt(searchtext + "\uf8ff").limitToLast(MyConstans.ADS_LIMIT);
+            readDataUpdate();
 
 
         }
@@ -177,17 +181,11 @@ public class DbManager {
 
 
         }else {
-            if (lastTime.equals("0")) {
-                mquery = databaseReference.orderByChild(ORDER_BY_CAT_TIME).startAt(cat).endAt(cat + "\uf8ff");
-            } else {
-                mquery = databaseReference.orderByChild(ORDER_BY_CAT_TIME).startAt(cat).endAt(cat + "\uf8ff");
+            mquery = databaseReference.orderByChild(ORDER_BY_CAT_TIME).startAt(cat + "_"+ lastTime).limitToFirst(MyConstans.ADS_LIMIT);
 
             }
 
-        }
         readDataUpdate();
-
-
 
 
 
@@ -252,15 +250,17 @@ public class DbManager {
         } catch (NumberFormatException e) {
             totalviews = 0;
 
+        } if(!mAuth.getCurrentUser().isAnonymous()) {
+            totalviews++;
+            Status_Item status_item = new Status_Item();
+            status_item.totalviews = String.valueOf(totalviews);
+            status_item.totalcalls = newPost.getTotalCalls();
+            status_item.totalemails = newPost.getTotalEmails();
+            status_item.cat_time = newPost.getCat() + "_" + newPost.getTime();
+            status_item.filter_time = newPost.getTime();
+            databaseReference.child(newPost.getKey()).child("status").setValue(status_item);
         }
-        totalviews++;
-        Status_Item status_item = new Status_Item();
-        status_item.totalviews = String.valueOf(totalviews);
-        status_item.totalcalls = newPost.getTotalCalls();
-        status_item.totalemails = newPost.getTotalEmails();
-        status_item.cat_time = newPost.getCat() + "_" + newPost.getTime();
-        status_item.filter_time = newPost.getTime();
-        databaseReference.child(newPost.getKey()).child("status").setValue(status_item);
+
 
     }
 
@@ -274,14 +274,16 @@ public class DbManager {
             totalcalls = 0;
 
         }
-        totalcalls++;
-        Status_Item status_item = new Status_Item();
-        status_item.totalcalls = String.valueOf(totalcalls);
-        status_item.totalviews = newPost.getTotalViews();
-        status_item.totalemails = newPost.getTotalEmails();
-        status_item.cat_time = newPost.getCat() + "_" + newPost.getTime();
-        status_item.filter_time = newPost.getTime();
-        databaseReference.child(newPost.getKey()).child("status").setValue(status_item);
+        if(!mAuth.getCurrentUser().isAnonymous()) {
+            totalcalls++;
+            Status_Item status_item = new Status_Item();
+            status_item.totalcalls = String.valueOf(totalcalls);
+            status_item.totalviews = newPost.getTotalViews();
+            status_item.totalemails = newPost.getTotalEmails();
+            status_item.cat_time = newPost.getCat() + "_" + newPost.getTime();
+            status_item.filter_time = newPost.getTime();
+            databaseReference.child(newPost.getKey()).child("status").setValue(status_item);
+        }
 
     }
 
@@ -347,6 +349,8 @@ public class DbManager {
                 if(task.isSuccessful()){
                     holder.imFav.setImageResource(R.drawable.ic_fav_no_selected);
                     newPost.setFav(false);
+
+
 
 
                 }

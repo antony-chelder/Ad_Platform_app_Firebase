@@ -5,6 +5,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -27,6 +28,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
+import com.FilterActivity;
 import com.db.DbManager;
 import com.EditActivity;
 import com.db.NewPost;
@@ -54,9 +56,9 @@ import java.util.List;
 
 import static com.accaunt_helper.Accaunt_helper.GOOGLE_SIGN_IN_CODE;
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, SearchView.OnQueryTextListener {
     private NavigationView navigationView;
-    private FirebaseAuth mAuth;
+    public static FirebaseAuth mAuth;
     private DrawerLayout drawerLayout;
     private TextView useremail;
     private AlertDialog dialog;
@@ -72,8 +74,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private AdView adView;
     private Accaunt_helper accaunt_helper;
     private ImageView imPhoto;
-    private MenuItem newAdItem;
-    private  int checkghost = 0;
+    private MenuItem newAdItem,myAddsItem,myFavItem;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -127,6 +130,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         rc.setAdapter(postAdapter);
 
         navigationView = findViewById(R.id.nav_view);
+        myAddsItem = navigationView.getMenu().findItem(R.id.id_ads);
+        myFavItem = navigationView.getMenu().findItem(R.id.fv_ads);
         imPhoto = navigationView.getHeaderView(0).findViewById(R.id.imPhoto);
 
 
@@ -134,6 +139,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         toolbar = findViewById(R.id.toolbar);
         toolbar.inflateMenu(R.menu.main_menu);
         newAdItem = toolbar.getMenu().findItem(R.id.new_add);
+        SearchView searchView = (SearchView) toolbar.getMenu().findItem(R.id.search).getActionView();
+        searchView.setOnQueryTextListener(this);
         ToolbarItemClick();
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle
                 (this,drawerLayout,toolbar,R.string.toggleopen,R.string.toggleclose);
@@ -256,7 +263,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public void onStart() {
         super.onStart();
-        getuserData();
+        MyUiUpdates();
 
 
 
@@ -265,15 +272,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 
 
-    public void getuserData(){
+    public void MyUiUpdates(){
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if(currentUser !=null){
             if(currentUser.isAnonymous()){
-                checkghost = 0;
+                myAddsItem.setVisible(false);
+                myFavItem.setVisible(false);
                 newAdItem.setVisible(false);
                 useremail.setText(R.string.guest);
             } else {
-                checkghost = 1;
+                myFavItem.setVisible(true);
+                myAddsItem.setVisible(true);
                 newAdItem.setVisible(true);
                 useremail.setText(currentUser.getEmail());
             }
@@ -293,75 +302,58 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
-        switch (id){
+        postAdapter.isFirstPage = true;
+        switch (id) {
 
             case R.id.id_others_ads:
 
-
                 current_cat = MyConstans.DIFFERENT;
-                dbManager.getDataFromDb(current_cat,"0");
+                dbManager.getDataFromDb(current_cat, "0");
 
                 break;
             case R.id.id_ads:
-                    if(checkghost==1) {
-                        current_cat = MyConstans.MY_ADS;
-                        dbManager.getDataFromDb(current_cat, "0");
-                    }else {
-                        Toast.makeText(this, R.string.cantseecategory, Toast.LENGTH_LONG).show();
-                    }
 
-
-
-            break;
-
-            case R.id.fv_ads:
-                    if(checkghost == 1) {
-                        current_cat = MyConstans.MY_FAVS;
-                        dbManager.getDataFromDb(current_cat, "0");
-                    } else {
-                        Toast.makeText(this, R.string.cantseecategory, Toast.LENGTH_LONG).show();
-                    }
-
-
-
+                current_cat = MyConstans.MY_ADS;
+                dbManager.getDataFromDb(current_cat, "0");
 
                 break;
 
+            case R.id.fv_ads:
+                current_cat = MyConstans.MY_FAVS;
+                dbManager.getDataFromDb(current_cat, "0");
+
+                break;
 
             case R.id.id_cars:
                 current_cat = getResources().getStringArray(R.array.category_spinnet)[0];
-                dbManager.getDataFromDb("Машины","0");
+                dbManager.getDataFromDb("Машины", "0");
                 break;
             case R.id.id_pc:
                 current_cat = getResources().getStringArray(R.array.category_spinnet)[1];
-                dbManager.getDataFromDb("Компьютеры","0");
+                dbManager.getDataFromDb("Компьютеры", "0");
                 break;
             case R.id.id_smartphone:
                 current_cat = getResources().getStringArray(R.array.category_spinnet)[2];
-                dbManager.getDataFromDb("Смартфоны","0");
+                dbManager.getDataFromDb("Смартфоны", "0");
                 break;
             case R.id.id_dm:
                 current_cat = getResources().getStringArray(R.array.category_spinnet)[3];
-                dbManager.getDataFromDb("Бытовая техника","0");
+                dbManager.getDataFromDb("Бытовая техника", "0");
                 break;
             case R.id.id_sign_up:
-                SignDialog(R.string.sign_up,R.string.sign_up_1,R.string.google_sign,0);
+                SignDialog(R.string.sign_up, R.string.sign_up_1, R.string.google_sign, 0);
 
                 break;
             case R.id.id_sign_in:
-                SignDialog(R.string.sign_in,R.string.sign_in_1,R.string.google_sign_in,1);
+                SignDialog(R.string.sign_in, R.string.sign_in_1, R.string.google_sign_in, 1);
 
 
                 break;
             case R.id.id_sign_out:
-                if(checkghost == 1) {
-                    accaunt_helper.signOut();
-                    current_cat = MyConstans.DIFFERENT;
-                    dbManager.getDataFromDb(current_cat, "0");
-                    imPhoto.setImageResource(android.R.color.transparent);
-                } else {
-                    Toast.makeText(this, R.string.cantexit, Toast.LENGTH_LONG).show();
-                }
+                accaunt_helper.signOut();
+                current_cat = MyConstans.DIFFERENT;
+                dbManager.getDataFromDb(current_cat, "0");
+                imPhoto.setImageResource(android.R.color.transparent);
 
 
                 break;
@@ -518,6 +510,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         }
                     }
 
+                } else if(item.getItemId() == R.id.filter){
+                    Intent i = new Intent(MainActivity.this, FilterActivity.class);
+                    startActivity(i);
                 }
 
 
@@ -526,4 +521,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         });
     }
 
+    public FirebaseAuth getmAuth() {
+        return mAuth;
+    }
+
+    @Override
+    public boolean onQueryTextSubmit(String query) {
+        dbManager.getSearchresult(query);
+        return true;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String newText) {
+        return true;
+    }
 }

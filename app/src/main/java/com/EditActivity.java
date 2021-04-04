@@ -5,10 +5,9 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.ArrayAdapter;
-import android.widget.EditText;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -33,6 +32,9 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.screens.Choose_images;
 import com.tony_fire.descorder.R;
+import com.tony_fire.descorder.databinding.EditLayoutBinding;
+import com.utils.CountryManager;
+import com.utils.DialogCountryHelper;
 import com.utils.ImagesManager;
 import com.utils.MyConstans;
 import com.utils.OnBitmapLoaded;
@@ -43,15 +45,14 @@ import java.util.Arrays;
 import java.util.List;
 
 public class EditActivity extends AppCompatActivity implements OnBitmapLoaded {
+    private EditLayoutBinding rootElement;
     public final int MAX_UPLOAD_IMAGE_SIZE = 1920;
 
     private StorageReference mStorageRef;
     private String[] uploadUri = new String[3];
     private String[] uploadNewUri = new String[3];
-    private Spinner spinner;
     private DatabaseReference databaseReference;
     private FirebaseAuth mAuth;
-    private EditText edtitle,edprice,edtel,edDesc,edEmail;
     private Boolean editstate = false;
     private String temp_cat = "";
     private String temp_uid = "";
@@ -63,8 +64,6 @@ public class EditActivity extends AppCompatActivity implements OnBitmapLoaded {
     private int loadimagecounter = 0;
     private List<String> imagesUris;
     private ImageAdapter imageAdapter;
-    private TextView images_conter;
-    private ViewPager vp;
     private List<Bitmap> bitmapArrayList;
     private ImagesManager imagesManager;
     private boolean isImagesloaded = false;
@@ -72,19 +71,18 @@ public class EditActivity extends AppCompatActivity implements OnBitmapLoaded {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.edit_layout);
+        rootElement = EditLayoutBinding.inflate(getLayoutInflater());
+        setContentView(rootElement.getRoot());
         init();
     }
 
     private void init() {
-        images_conter = findViewById(R.id.tvImagesCounter);
         imagesUris = new ArrayList<>();
         bitmapArrayList = new ArrayList<>();
         imageAdapter = new ImageAdapter(this);
-        imagesManager = new ImagesManager(this,this);
-        vp = findViewById(R.id.view_pager2);
-        vp.setAdapter(imageAdapter);
-        vp.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+        imagesManager = new ImagesManager(this, this);
+        rootElement.viewPager2.setAdapter(imageAdapter);
+        rootElement.viewPager2.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
 
@@ -93,7 +91,7 @@ public class EditActivity extends AppCompatActivity implements OnBitmapLoaded {
             @Override
             public void onPageSelected(int position) {
                 String dataText = position + 1 + "/" + imagesUris.size();
-                images_conter.setText(dataText);
+                rootElement.tvImagesCounter.setText(dataText);
 
             }
 
@@ -109,19 +107,10 @@ public class EditActivity extends AppCompatActivity implements OnBitmapLoaded {
         uploadUri[2] = "empty";
         progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("Идет загрузка...");
-        edtitle = findViewById(R.id.ItemTitile);
-        edprice = findViewById(R.id.itemPrice);
-        edtel = findViewById(R.id.ItemTel);
-        edDesc = findViewById(R.id.edDesc);
-        edEmail = findViewById(R.id.Tvemail);
-        edtitle = findViewById(R.id.ItemTitile);
-
-
-        spinner = findViewById(R.id.spinner);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource
                 (this, R.array.category_spinnet, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(adapter);
+        rootElement.spinner.setAdapter(adapter);
 
         mStorageRef = FirebaseStorage.getInstance().getReference("Images");
 
@@ -142,13 +131,19 @@ public class EditActivity extends AppCompatActivity implements OnBitmapLoaded {
 
     private void SetDataAdds(Intent i) {
         //Picasso.get().load(i.getStringExtra(MyConstans.IMAGEID)).into(imItem);
-        NewPost newPost = (NewPost)i.getSerializableExtra(MyConstans.NEW_POST_INTENT);
-        if(newPost==null)return;
-        edtel.setText(newPost.getTel());
-        edtitle.setText(newPost.getTitle());
-        edprice.setText(newPost.getPrice());
-        edEmail.setText(newPost.getEmail());
-        edDesc.setText(newPost.getDesc());
+        NewPost newPost = (NewPost) i.getSerializableExtra(MyConstans.NEW_POST_INTENT);
+        if (newPost == null) return;
+        rootElement.ItemTel.setText(newPost.getTel());
+        rootElement.ItemTitile.setText(newPost.getTitle());
+        rootElement.itemPrice.setText(newPost.getPrice());
+        rootElement.Tvemail.setText(newPost.getEmail());
+        rootElement.edDesc.setText(newPost.getDesc());
+        rootElement.spinner.setEnabled(false);
+        rootElement.selectCountry.setText(newPost.getSelectcountry());
+        rootElement.selectCity.setText(newPost.getSelectcity());
+        rootElement.indexChoose.setText(newPost.getIndex());
+
+
         temp_cat = newPost.getCat();
         temp_totalviews = newPost.getTotalViews();
         temp_uid = newPost.getUid();
@@ -156,7 +151,7 @@ public class EditActivity extends AppCompatActivity implements OnBitmapLoaded {
         temp_key = newPost.getKey();
 
         uploadUri[0] = newPost.getImageId();
-        uploadUri[1] =newPost.getImageId2();
+        uploadUri[1] = newPost.getImageId2();
         uploadUri[2] = newPost.getImageId3();
         for (String s : uploadUri) {
             if (!s.equals("empty")) imagesUris.add(s);
@@ -170,7 +165,7 @@ public class EditActivity extends AppCompatActivity implements OnBitmapLoaded {
         } else {
             dataText = 0 + "/" + imagesUris.size();
         }
-        images_conter.setText(dataText);
+        rootElement.tvImagesCounter.setText(dataText);
 
 
     }
@@ -204,7 +199,7 @@ public class EditActivity extends AppCompatActivity implements OnBitmapLoaded {
                         if (loadimagecounter < uploadUri.length) {
                             uploadImage();
                         } else {
-                            SavePost();
+                           PublishPost();
                             Toast.makeText(EditActivity.this, "Upload done!", Toast.LENGTH_SHORT).show();
                             finish();
                         }
@@ -222,7 +217,7 @@ public class EditActivity extends AppCompatActivity implements OnBitmapLoaded {
                 uploadImage();
             }
         } else {
-            SavePost();
+            PublishPost();
             finish();
         }
 
@@ -256,7 +251,7 @@ public class EditActivity extends AppCompatActivity implements OnBitmapLoaded {
                             uploadUpdateImage();
 
                         } else {
-                            UpdatePost();
+                            PublishPost();
 
                         }
 
@@ -300,7 +295,7 @@ public class EditActivity extends AppCompatActivity implements OnBitmapLoaded {
                         uploadUpdateImage();
 
                     } else {
-                        UpdatePost();
+                        PublishPost();
 
                     }
 
@@ -314,7 +309,7 @@ public class EditActivity extends AppCompatActivity implements OnBitmapLoaded {
                 }
             });
         } else {
-            UpdatePost();
+            PublishPost();
 
         }
 
@@ -346,18 +341,18 @@ public class EditActivity extends AppCompatActivity implements OnBitmapLoaded {
                 String[] tempUriArray = getUrisFromChoose(data);
                 isImagesloaded = false;
                 imagesManager.resizeMultiLargeImage(Arrays.asList(tempUriArray));
-                for (String s : tempUriArray)  {
+                for (String s : tempUriArray) {
                     if (!s.equals("empty")) imagesUris.add(s);
                 }
                 imageAdapter.UpdateImages(imagesUris);
                 String dataText;
                 if (imagesUris.size() > 0) {
 
-                    dataText = vp.getCurrentItem() + 1 + "/" + imagesUris.size();
+                    dataText = rootElement.viewPager2.getCurrentItem() + 1 + "/" + imagesUris.size();
                 } else {
                     dataText = 0 + "/" + imagesUris.size();
                 }
-                images_conter.setText(dataText);
+                rootElement.tvImagesCounter.setText(dataText);
 
 
             }
@@ -376,89 +371,95 @@ public class EditActivity extends AppCompatActivity implements OnBitmapLoaded {
 
     }
 
-    private void UpdatePost() {
+    private void PublishPost() {
         mAuth = FirebaseAuth.getInstance();
         if (mAuth.getUid() != null) {
             databaseReference = FirebaseDatabase.getInstance().getReference(DbManager.MAIN_ADS_PATH);
-
-
-
             NewPost post = new NewPost();
             post.setImageId(uploadUri[0]);
             post.setImageId2(uploadUri[1]);
             post.setImageId3(uploadUri[2]);
-            post.setTitle(edtitle.getText().toString());
-            post.setTel(edtel.getText().toString());
-            post.setPrice(edprice.getText().toString());
-            post.setEmail(edEmail.getText().toString());
-            post.setDesc(edDesc.getText().toString());
+            post.setTitle(rootElement.ItemTitile.getText().toString());
+            post.setCat(rootElement.spinner.getSelectedItem().toString());
+            post.setSelectcity(rootElement.selectCity.getText().toString());
+            post.setSelectcountry(rootElement.selectCountry.getText().toString());
+            post.setIndex(rootElement.indexChoose.getText().toString());
+            post.setTel(rootElement.ItemTel.getText().toString());
+            post.setPrice(rootElement.itemPrice.getText().toString());
+            post.setEmail(rootElement.Tvemail.getText().toString());
+            post.setDesc(rootElement.edDesc.getText().toString());
 
-            post.setKey(temp_key);
-            post.setCat(temp_cat);
-            post.setTime(temp_time);
-            post.setUid(temp_uid);
-            post.setTotalViews(temp_totalviews);
-            post.setTotalViews("0");
+            if (editstate) {
+                updatePost(post);
+            } else {
+                SavePost(post);
+            }
+        }
+    }
+
+    private void updatePost(NewPost post) {
+
+        if(mAuth.getUid()==null)return;
+        post.setKey(temp_key);
+        post.setCat(temp_cat);
+        post.setTime(temp_time);
+        post.setUid(temp_uid);
+        post.setTotalViews(temp_totalviews);
+        post.setTotalViews("0");
             databaseReference.child(temp_key).child(mAuth.getUid()).child("ads").setValue(post).
                     addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
 
-                                Toast.makeText(EditActivity.this, "Upload done!", Toast.LENGTH_SHORT).show();
-                                finish();
-                            }
-
+                            Toast.makeText(EditActivity.this, "Upload done!", Toast.LENGTH_SHORT).show();
+                            finish();
+                        }
 
                     });
         }
+
+
+
+    private void SavePost(NewPost post) {
+
+        if(mAuth.getUid()==null)return;
+        String key = databaseReference.push().getKey();
+        post.setKey(key);
+        post.setCat(rootElement.spinner.getSelectedItem().toString());
+        post.setTime(String.valueOf(System.currentTimeMillis()));
+        post.setUid(mAuth.getUid());
+
+        if (key != null) {
+            Status_Item status_item = new Status_Item();
+            status_item.cat_time = post.getCat() + "_" + post.getTime();
+            status_item.filter_time = post.getTime();
+            status_item.title_time= post.getTitle().toLowerCase() + "_" + post.getTime();
+
+            status_item.country_title_time =  (post.getSelectcountry() + "_" +  post.getTitle().toLowerCase() + "_" + post.getTime()).toLowerCase();
+            status_item.country_city_title_time= (post.getSelectcountry()  + "_" + post.getSelectcity() + "_" +  post.getTime()).toLowerCase();
+            status_item.country_city_index_title_time = (post.getSelectcountry()  + "_" + post.getSelectcity() + "_"  + post.getIndex() + "_"
+                    + post.getTitle() + "_" + post.getTime()).toLowerCase();
+            databaseReference.child(key).child(mAuth.getUid()).child("ads").setValue(post);
+            databaseReference.child(key).child("status").setValue(status_item);
+        }
+
+
+        Intent i = new Intent();
+        i.putExtra("cat", rootElement.spinner.getSelectedItem().toString());
+        setResult(RESULT_OK, i);
     }
 
 
 
 
 
-    private void SavePost() {
-        databaseReference = FirebaseDatabase.getInstance().getReference(DbManager.MAIN_ADS_PATH);
-        mAuth = FirebaseAuth.getInstance();
-
-        if (mAuth.getUid() != null) {
-            String key = databaseReference.push().getKey();
-
-                NewPost post = new NewPost();
-
-                post.setImageId(uploadUri[0]);
-                post.setImageId2(uploadUri[1]);
-                post.setImageId3(uploadUri[2]);
-                post.setTitle(edtitle.getText().toString());
-                post.setTel(edtel.getText().toString());
-                post.setPrice(edprice.getText().toString());
-                post.setEmail(edEmail.getText().toString());
-                post.setDesc(edDesc.getText().toString());
-                post.setKey(key);
-                post.setCat(spinner.getSelectedItem().toString());
-                post.setTime(String.valueOf(System.currentTimeMillis()));
-                post.setUid(mAuth.getUid());
-
-                if (key != null) {
-                    Status_Item status_item = new Status_Item();
-                    status_item.cat_time = post.getCat() + "_" + post.getTime();
-                    status_item.filter_time = post.getTime();
-                    databaseReference.child(key).child(mAuth.getUid()).child("ads").setValue(post);
-                    databaseReference.child(key).child("status").setValue(status_item);
-                }
-
-
-                Intent i = new Intent();
-                i.putExtra("cat", spinner.getSelectedItem().toString());
-                setResult(RESULT_OK, i);
-            }
-
-
-    }
 
     public void onClickSave(View view) {
-        if (isImagesloaded && !edtitle.getText().toString().isEmpty() &&
-                !edtel.getText().toString().isEmpty() && !edprice.getText().toString().isEmpty() && !edDesc.getText().toString().isEmpty()  ) {
+        if(!isFieldEmpty()){
+            Toast.makeText(this, R.string.message_of_empty, Toast.LENGTH_LONG).show();
+            return;
+        }
+        if (isImagesloaded) {
             progressDialog.show();
             if (!editstate) {
                 uploadImage();
@@ -466,15 +467,27 @@ public class EditActivity extends AppCompatActivity implements OnBitmapLoaded {
                 if (IsimageUpdate) {
                     uploadUpdateImage();
                 } else {
-                    UpdatePost();
+                    PublishPost();
                 }
 
             }
-        }else {
-            Toast.makeText(this, R.string.message_of_empty, Toast.LENGTH_SHORT).show();
         }
 
 
+
+    }
+
+    private Boolean isFieldEmpty(){
+        String country = rootElement.selectCountry.getText().toString();
+        String city = rootElement.selectCity.getText().toString();
+        String title = rootElement.ItemTitile.getText().toString();
+        String price = rootElement.itemPrice.getText().toString();
+        String desc = rootElement.edDesc.getText().toString();
+        String tel = rootElement.ItemTel.getText().toString();
+        String index = rootElement.indexChoose.getText().toString();
+
+         return (!country.equals(getString(R.string.select_country)) && !TextUtils.isEmpty(index)  && !city.equals(getString(R.string.select_city)) && !TextUtils.isEmpty(title)
+                && !TextUtils.isEmpty(price) && !TextUtils.isEmpty(desc) && !TextUtils.isEmpty(tel));
 
     }
 
@@ -497,5 +510,25 @@ public class EditActivity extends AppCompatActivity implements OnBitmapLoaded {
         });
 
 
+    }
+
+    public void onClickSetCountry(View view) {
+        String city = rootElement.selectCity.getText().toString();
+        if(!city.equals(getString(R.string.select_city))) {
+            rootElement.selectCity.setText(R.string.select_city);
+        }
+            DialogCountryHelper.INSTANCE.showDialog(this, CountryManager.INSTANCE.getAllCountries(this), (TextView) view);
+    }
+    public void onClickSetCity(View view) {
+        String country = rootElement.selectCountry.getText().toString();
+        if(!country.equals(getString(R.string.select_country))) {
+            DialogCountryHelper.INSTANCE.showDialog(this, CountryManager.INSTANCE.getAllCities(this,country ), (TextView) view);
+        }else{
+            Toast.makeText(this, "Страна не выбрана", Toast.LENGTH_LONG).show();
+        }
+    }
+
+    public EditLayoutBinding getRootElement() {
+        return rootElement;
     }
 }

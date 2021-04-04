@@ -6,139 +6,193 @@
     android:layout_height="match_parent"
     android:background="@color/purple_200">
 
-    <androidx.viewpager.widget.ViewPager
-        android:id="@+id/view_pager2"
-        android:layout_width="0dp"
-        android:layout_height="200dp"
 
-
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-
-        android:layout_marginEnd="8dp"
-        android:background="@drawable/ed_bg"
-        android:padding="10dp"
+    <ScrollView
+        android:id="@+id/scrollView2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/purple_200"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <androidx.viewpager.widget.ViewPager
+                    android:id="@+id/view_pager2"
+                    android:layout_width="0dp"
+                    android:layout_height="200dp"
 
 
-    <EditText
-        android:id="@+id/ItemTitile"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:background="@drawable/ed_bg"
-        android:ems="10"
-        android:hint="@string/editTitile"
-        android:inputType="textPersonName"
-        android:padding="5dp"
-        app:layout_constraintEnd_toEndOf="@+id/view_pager2"
-        app:layout_constraintStart_toStartOf="@+id/view_pager2"
-        app:layout_constraintTop_toBottomOf="@+id/spinner" />
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:background="@drawable/ed_bg"
+                    android:padding="10dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
 
-    <TextView
-        android:id="@+id/tvImagesCounter"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:background="@drawable/ed_bg"
-        android:padding="5dp"
-        android:text="0/0"
-        android:textColor="@color/teal_200"
-        android:textSize="10sp"
-        app:layout_constraintBottom_toBottomOf="@+id/view_pager2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+                </androidx.viewpager.widget.ViewPager>
 
-    <ImageButton
-        android:id="@+id/imageButton4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:background="@android:color/transparent"
-        android:onClick="onClickImage"
-        app:layout_constraintEnd_toEndOf="@+id/view_pager2"
-        app:layout_constraintTop_toTopOf="@+id/view_pager2"
-        app:srcCompat="@drawable/gallery" />
+                <ImageButton
+                    android:id="@+id/imEdit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:background="@android:color/transparent"
+                    android:onClick="onClickImage"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/view_pager2"
+                    app:srcCompat="@drawable/gallery" />
 
-    <EditText
-        android:id="@+id/itemPrice"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:background="@drawable/ed_bg"
-        android:ems="10"
-        android:hint="@string/editprice"
-        android:inputType="textPersonName"
-        android:padding="5dp"
-        app:layout_constraintEnd_toEndOf="@+id/ItemTitile"
-        app:layout_constraintStart_toStartOf="@+id/ItemTitile"
-        app:layout_constraintTop_toBottomOf="@+id/ItemTitile" />
+                <TextView
+                    android:id="@+id/tvImagesCounter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="11dp"
+                    android:background="@drawable/ed_bg"
+                    android:padding="5dp"
+                    android:text="0/0"
+                    android:textColor="@color/teal_200"
+                    android:textSize="10sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="@+id/view_pager2"
+                    app:layout_constraintStart_toStartOf="@+id/view_pager2" />
 
-    <EditText
-        android:id="@+id/ItemTel"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:background="@drawable/ed_bg"
-        android:ems="10"
-        android:hint="@string/editTel"
-        android:inputType="textPersonName"
-        android:padding="5dp"
-        app:layout_constraintEnd_toEndOf="@+id/ItemTitile"
-        app:layout_constraintStart_toStartOf="@+id/ItemTitile"
-        app:layout_constraintTop_toBottomOf="@+id/itemPrice" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <EditText
-        android:id="@+id/edDesc"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="70dp"
-        android:background="@drawable/ed_bg"
-        android:ems="10"
-        android:gravity="top"
-        android:hint="@string/editdisc"
-        android:inputType="textMultiLine|textPersonName"
-        android:padding="5dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/ItemTitile"
-        app:layout_constraintStart_toStartOf="@+id/ItemTitile"
-        app:layout_constraintTop_toBottomOf="@+id/Tvemail" />
+            <Spinner
+                android:id="@+id/spinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:layout_marginTop="8dp"
+                android:background="@android:drawable/spinner_dropdown_background"
+                android:padding="8dp" />
 
-    <EditText
-        android:id="@+id/Tvemail"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:background="@drawable/ed_bg"
-        android:ems="10"
-        android:hint="@string/email"
-        android:inputType="textPersonName"
-        android:padding="5dp"
-        app:layout_constraintEnd_toEndOf="@+id/ItemTitile"
-        app:layout_constraintStart_toStartOf="@+id/ItemTitile"
-        app:layout_constraintTop_toBottomOf="@+id/ItemTel" />
+            <TextView
+                android:id="@+id/selectCountry"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:layout_marginTop="8dp"
+                android:onClick="onClickSetCountry"
+                android:padding="8dp"
+                android:text="@string/select_country"
+                android:textSize="18sp"
+                android:textStyle="bold" />
 
-    <Spinner
-        android:id="@+id/spinner"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:background="@android:drawable/spinner_dropdown_background"
-        app:layout_constraintEnd_toEndOf="@+id/ItemTitile"
-        app:layout_constraintStart_toStartOf="@+id/ItemTitile"
-        app:layout_constraintTop_toBottomOf="@+id/view_pager2" />
+            <TextView
+                android:id="@+id/selectCity"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:layout_marginTop="8dp"
+                android:onClick="onClickSetCity"
+                android:padding="8dp"
+                android:text="@string/select_city"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                tools:ignore="OnClick" />
+
+            <EditText
+                android:id="@+id/index_choose"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/ed_bg"
+                android:ems="10"
+                android:hint="@string/index_edit"
+                android:inputType="number"
+                android:padding="8dp" />
+
+            <EditText
+                android:id="@+id/ItemTitile"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/ed_bg"
+                android:ems="10"
+                android:hint="@string/editTitile"
+                android:inputType="textPersonName"
+                android:padding="8dp" />
+
+
+            <EditText
+                android:id="@+id/itemPrice"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/ed_bg"
+                android:ems="10"
+                android:hint="@string/editprice"
+                android:inputType="textPersonName"
+                android:padding="8dp" />
+
+            <EditText
+                android:id="@+id/ItemTel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/ed_bg"
+                android:ems="10"
+                android:hint="@string/editTel"
+                android:inputType="textPersonName"
+                android:padding="8dp" />
+
+            <EditText
+                android:id="@+id/Tvemail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/ed_bg"
+                android:ems="10"
+                android:hint="@string/email"
+                android:inputType="textPersonName"
+                android:padding="8dp" />
+
+            <EditText
+                android:id="@+id/edDesc"
+                android:layout_width="match_parent"
+                android:layout_height="400dp"
+                android:layout_margin="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="70dp"
+                android:background="@drawable/ed_bg"
+                android:ems="10"
+                android:gravity="top"
+                android:hint="@string/editdisc"
+                android:inputType="textMultiLine|textPersonName"
+                android:padding="8dp"
+                app:layout_constraintBottom_toBottomOf="parent" />
+
+        </LinearLayout>
+
+    </ScrollView>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/floatingActionButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
-        android:layout_marginBottom="8dp"
-        android:clickable="true"
+        android:layout_marginBottom="16dp"
         android:onClick="onClickSave"
         app:backgroundTint="@color/nav_header"
         app:layout_constraintBottom_toBottomOf="parent"

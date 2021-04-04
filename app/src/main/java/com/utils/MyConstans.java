@@ -4,7 +4,7 @@ import com.tony_fire.descorder.MainActivity;
 
 public class MyConstans {
     public static final String TITLE = "title_" + MainActivity.class.getName();
-    public static final int ADS_LIMIT = 10;
+    public static final int ADS_LIMIT = 8;
     public static final String DIFFERENT = "others_cat";
     public static final String MY_ADS = "my_ads";
     public static final String MY_FAVS = "my_favs";
